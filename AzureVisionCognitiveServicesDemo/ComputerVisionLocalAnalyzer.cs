@@ -11,7 +11,7 @@ namespace AzureVisionCognitiveServicesDemo.ComputerVision
     public static class ComputerVisionAnalyzer
     {
         // Analyze a local image
-        public static Task<ImageAnalysis> AnalyzeLocalAsync(ComputerVisionClient computerVision,
+        public static async Task<ImageAnalysis> AnalyzeLocalAsync(ComputerVisionClient computerVision,
             string imagePath, IList<VisualFeatureTypes> features)
         {
             if (!File.Exists(imagePath))
@@ -23,13 +23,13 @@ namespace AzureVisionCognitiveServicesDemo.ComputerVision
 
             using (Stream imageStream = File.OpenRead(imagePath))
             {
-                return computerVision.AnalyzeImageInStreamAsync(
+                return await computerVision.AnalyzeImageInStreamAsync(
                     imageStream, features);
             }
         }
 
         // Analyze a remote image
-        public static Task<ImageAnalysis> AnalyzeRemoteAsync(
+        public static async Task<ImageAnalysis> AnalyzeRemoteAsync(
             ComputerVisionClient computerVision, string imageUrl, IList<VisualFeatureTypes> features)
         {
             if (!Uri.IsWellFormedUriString(imageUrl, UriKind.Absolute))
@@ -39,7 +39,7 @@ namespace AzureVisionCognitiveServicesDemo.ComputerVision
                 throw new FileNotFoundException(imageUrl);
             }
 
-            return computerVision.AnalyzeImageAsync(imageUrl, features);
+            return await computerVision.AnalyzeImageAsync(imageUrl, features);
         }
 
         // Recognize text from a local image
