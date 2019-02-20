@@ -10,6 +10,33 @@ namespace AzureVisionCognitiveServicesDemo.FaceIdentification
 {
     public static class FaceAnalyzer
     {
+        // Detect faces in a local image
+        public static async Task DetectLocalAsync(FaceClient faceClient, string imagePath)
+        {
+            if (!File.Exists(imagePath))
+            {
+                Console.WriteLine(
+                    "\nUnable to open or read localImagePath:\n{0} \n", imagePath);
+                return;
+            }
+
+            try
+            {
+                using (Stream imageStream = File.OpenRead(imagePath))
+                {
+                    IList<DetectedFace> faceList =
+                        await faceClient.Face.DetectWithStreamAsync(
+                            imageStream, true, false, Variables.FaceAttributes);
+
+                    DisplayResults(faceList, imagePath);
+                }
+            }
+            catch (APIErrorException e)
+            {
+                Console.WriteLine(imagePath + ": " + e.Message);
+            }
+        }
+
         // Detect faces in a remote image
         public static async Task DetectRemoteAsync(
             FaceClient faceClient, string imageUrl)
@@ -44,33 +71,6 @@ namespace AzureVisionCognitiveServicesDemo.FaceIdentification
 
                 Console.WriteLine(stringResultRepresentation);
                 Console.WriteLine();
-            }
-        }
-
-        // Detect faces in a local image
-        public static async Task DetectLocalAsync(FaceClient faceClient, string imagePath)
-        {
-            if (!File.Exists(imagePath))
-            {
-                Console.WriteLine(
-                    "\nUnable to open or read localImagePath:\n{0} \n", imagePath);
-                return;
-            }
-
-            try
-            {
-                using (Stream imageStream = File.OpenRead(imagePath))
-                {
-                    IList<DetectedFace> faceList =
-                        await faceClient.Face.DetectWithStreamAsync(
-                            imageStream, true, false, Variables.FaceAttributes);
-
-                    DisplayResults(faceList, imagePath);
-                }
-            }
-            catch (APIErrorException e)
-            {
-                Console.WriteLine(imagePath + ": " + e.Message);
             }
         }
     }
