@@ -77,11 +77,18 @@ namespace AzureVisionCognitiveServicesDemo.Face
             }
         }
 
-        public static async Task CompareTwoFaces(FaceClient faceClient, Guid faceId0, Guid faceId1)
+        public static async Task<VerifyResult> CompareTwoFaces(FaceClient faceClient, Guid faceId0, Guid faceId1)
         {
-            var result =
-                await faceClient.Face.VerifyFaceToFaceWithHttpMessagesAsync(faceId0, faceId1);
-            //TODO: handle result correctly
+            var result = await faceClient.Face
+                .VerifyFaceToFaceWithHttpMessagesAsync(faceId0, faceId1);
+
+            return result.Body;
+        }
+
+        public static void DisplayResults(VerifyResult verifyResult)
+        {
+            Console.WriteLine($"Confidence: {verifyResult.Confidence}");
+            Console.WriteLine($"Is identical: {verifyResult.IsIdentical}");
         }
     }
 }
