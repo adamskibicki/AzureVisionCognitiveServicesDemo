@@ -1,4 +1,4 @@
-﻿namespace AzureVisionCognitiveServicesDemo.FaceIdentification
+﻿namespace AzureVisionCognitiveServicesDemo.Face
 {
     public static class Paths
     {

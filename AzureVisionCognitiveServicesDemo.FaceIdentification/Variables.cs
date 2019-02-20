@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 
-namespace AzureVisionCognitiveServicesDemo.FaceIdentification
+namespace AzureVisionCognitiveServicesDemo.Face
 {
     public static class Variables
     {

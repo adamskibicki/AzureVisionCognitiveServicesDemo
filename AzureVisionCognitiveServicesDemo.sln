@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureVisionCognitiveServicesDemo.ComputerVision", "AzureVisionCognitiveServicesDemo\AzureVisionCognitiveServicesDemo.ComputerVision.csproj", "{A7845554-1F73-46AE-8BA6-CB3ABC864D8F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureVisionCognitiveServicesDemo.FaceIdentification", "AzureVisionCognitiveServicesDemo.FaceIdentification\AzureVisionCognitiveServicesDemo.FaceIdentification.csproj", "{D128DF42-DED8-41B9-A6A3-248A2050E72F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureVisionCognitiveServicesDemo.Face", "AzureVisionCognitiveServicesDemo.FaceIdentification\AzureVisionCognitiveServicesDemo.Face.csproj", "{D128DF42-DED8-41B9-A6A3-248A2050E72F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureVisionCognitiveServicesDemo.FaceGrouping", "AzureVisionCognitiveServicesDemo.FaceGrouping\AzureVisionCognitiveServicesDemo.FaceGrouping.csproj", "{EE9E5ABF-C5FC-4E85-9F34-90F52A0679B6}"
 EndProject

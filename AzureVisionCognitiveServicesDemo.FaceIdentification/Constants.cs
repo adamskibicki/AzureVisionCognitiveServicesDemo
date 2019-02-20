@@ -1,4 +1,4 @@
-﻿namespace AzureVisionCognitiveServicesDemo
+﻿namespace AzureVisionCognitiveServicesDemo.Face
 {
     public static class Constants
     {

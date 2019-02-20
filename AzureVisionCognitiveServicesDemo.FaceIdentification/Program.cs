@@ -1,7 +1,7 @@
-﻿using Microsoft.Azure.CognitiveServices.Vision.Face;
-using System;
+﻿using System;
+using Microsoft.Azure.CognitiveServices.Vision.Face;
 
-namespace AzureVisionCognitiveServicesDemo.FaceIdentification
+namespace AzureVisionCognitiveServicesDemo.Face
 {
     class Program
     { 

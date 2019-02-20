@@ -6,7 +6,7 @@ using Microsoft.Azure.CognitiveServices.Vision.Face;
 using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
 using Newtonsoft.Json;
 
-namespace AzureVisionCognitiveServicesDemo.FaceIdentification
+namespace AzureVisionCognitiveServicesDemo.Face
 {
     public static class FaceAnalyzer
     {
