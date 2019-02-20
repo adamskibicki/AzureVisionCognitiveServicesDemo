@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Azure.CognitiveServices.Vision.Face;
 using Microsoft.Azure.CognitiveServices.Vision.Face.Models;
@@ -11,13 +12,13 @@ namespace AzureVisionCognitiveServicesDemo.Face
     public static class FaceAnalyzer
     {
         // Detect faces in a local image
-        public static async Task DetectLocalAsync(FaceClient faceClient, string imagePath)
+        public static async Task<IEnumerable<DetectedFace>> DetectLocalAsync(FaceClient faceClient, string imagePath)
         {
             if (!File.Exists(imagePath))
             {
                 Console.WriteLine(
                     "\nUnable to open or read localImagePath:\n{0} \n", imagePath);
-                return;
+                return Enumerable.Empty<DetectedFace>();
             }
 
             try
@@ -28,23 +29,24 @@ namespace AzureVisionCognitiveServicesDemo.Face
                         await faceClient.Face.DetectWithStreamAsync(
                             imageStream, true, false, Variables.FaceAttributes);
 
-                    DisplayResults(faceList, imagePath);
+                    return faceList;
                 }
             }
             catch (APIErrorException e)
             {
                 Console.WriteLine(imagePath + ": " + e.Message);
             }
+            return Enumerable.Empty<DetectedFace>();
         }
 
         // Detect faces in a remote image
-        public static async Task DetectRemoteAsync(
+        public static async Task<IEnumerable<DetectedFace>> DetectRemoteAsync(
             FaceClient faceClient, string imageUrl)
         {
             if (!Uri.IsWellFormedUriString(imageUrl, UriKind.Absolute))
             {
                 Console.WriteLine("\nInvalid remoteImageUrl:\n{0} \n", imageUrl);
-                return;
+                return Enumerable.Empty<DetectedFace>();
             }
 
             try
@@ -53,15 +55,16 @@ namespace AzureVisionCognitiveServicesDemo.Face
                     await faceClient.Face.DetectWithUrlAsync(
                         imageUrl, true, false, Variables.FaceAttributes);
 
-                DisplayResults(faceList, imageUrl);
+                return faceList;
             }
             catch (APIErrorException e)
             {
                 Console.WriteLine(imageUrl + ": " + e.Message);
             }
+            return Enumerable.Empty<DetectedFace>();
         }
 
-        private static void DisplayResults(IList<DetectedFace> faceList, string imagePath)
+        public static void DisplayResults(IEnumerable<DetectedFace> faceList, string imagePath)
         {
             Console.WriteLine(imagePath);
             foreach (var detectedFace in faceList)
@@ -72,6 +75,13 @@ namespace AzureVisionCognitiveServicesDemo.Face
                 Console.WriteLine(stringResultRepresentation);
                 Console.WriteLine();
             }
+        }
+
+        public static async Task CompareTwoFaces(FaceClient faceClient, Guid faceId0, Guid faceId1)
+        {
+            var result =
+                await faceClient.Face.VerifyFaceToFaceWithHttpMessagesAsync(faceId0, faceId1);
+            //TODO: handle result correctly
         }
     }
 }
