@@ -13,6 +13,8 @@ namespace AzureVisionCognitiveServicesDemo.FaceGrouping
         public static async Task Start()
         {
             var faceServiceClient = new FaceServiceClient(Constants.SUBSCRIPTION_KEY, Constants.API_URL);
+
+            #region comment it if you have already created and trained group
             await DeleteGroup(faceServiceClient);
 
             // Create an empty PersonGroup
@@ -23,8 +25,16 @@ namespace AzureVisionCognitiveServicesDemo.FaceGrouping
             await faceServiceClient.TrainPersonGroupAsync(Constants.PERSON_GROUP_ID);
             // Wait
             await WaitUntilTrainingEnds(faceServiceClient);
+            #endregion
 
-            await IdentifySuspects(faceServiceClient, Paths.TEST_IMAGE_PATH);
+            await IdentifySuspects(faceServiceClient, Paths.TEST_IMAGE_PATH_0);
+            Console.ReadLine();
+
+            await IdentifySuspects(faceServiceClient, Paths.TEST_IMAGE_PATH_1);
+            Console.ReadLine();
+
+            await IdentifySuspects(faceServiceClient, Paths.TEST_IMAGE_PATH_2);
+            Console.ReadLine();
 
             await DeleteGroup(faceServiceClient);
         }
