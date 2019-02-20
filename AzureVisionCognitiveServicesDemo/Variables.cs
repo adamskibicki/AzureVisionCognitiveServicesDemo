@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 
-namespace AzureVisionCognitiveServicesDemo
+namespace AzureVisionCognitiveServicesDemo.ComputerVision
 {
     public static class Variables
     {

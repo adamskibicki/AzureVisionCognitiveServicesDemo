@@ -6,7 +6,7 @@ using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
 using Newtonsoft.Json;
 
-namespace AzureVisionCognitiveServicesDemo
+namespace AzureVisionCognitiveServicesDemo.ComputerVision
 {
     public static class ComputerVisionAnalyzer
     {

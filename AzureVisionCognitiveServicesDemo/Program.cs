@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
 
-namespace AzureVisionCognitiveServicesDemo
+namespace AzureVisionCognitiveServicesDemo.ComputerVision
 {
     class Program
     {

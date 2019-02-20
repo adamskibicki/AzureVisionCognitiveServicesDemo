@@ -1,4 +1,4 @@
-﻿namespace AzureVisionCognitiveServicesDemo
+﻿namespace AzureVisionCognitiveServicesDemo.ComputerVision
 {
     public static class Paths
     {
