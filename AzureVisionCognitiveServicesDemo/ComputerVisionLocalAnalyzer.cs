@@ -11,7 +11,7 @@ namespace AzureVisionCognitiveServicesDemo
     public static class ComputerVisionAnalyzer
     {
         // Analyze a local image
-        public static async Task<ImageAnalysis> AnalyzeLocalAsync(ComputerVisionClient computerVision,
+        public static Task<ImageAnalysis> AnalyzeLocalAsync(ComputerVisionClient computerVision,
             string imagePath, IList<VisualFeatureTypes> features)
         {
             if (!File.Exists(imagePath))
@@ -23,13 +23,13 @@ namespace AzureVisionCognitiveServicesDemo
 
             using (Stream imageStream = File.OpenRead(imagePath))
             {
-                return await computerVision.AnalyzeImageInStreamAsync(
+                return computerVision.AnalyzeImageInStreamAsync(
                     imageStream, features);
             }
         }
 
         // Analyze a remote image
-        public static async Task<ImageAnalysis> AnalyzeRemoteAsync(
+        public static Task<ImageAnalysis> AnalyzeRemoteAsync(
             ComputerVisionClient computerVision, string imageUrl, IList<VisualFeatureTypes> features)
         {
             if (!Uri.IsWellFormedUriString(imageUrl, UriKind.Absolute))
@@ -39,18 +39,18 @@ namespace AzureVisionCognitiveServicesDemo
                 throw new FileNotFoundException(imageUrl);
             }
 
-            return await computerVision.AnalyzeImageAsync(imageUrl, features);
+            return computerVision.AnalyzeImageAsync(imageUrl, features);
         }
 
         // Recognize text from a local image
-        public static async Task ExtractLocalTextAsync(
+        public static async Task<TextOperationResult> ExtractLocalTextAsync(
             ComputerVisionClient computerVision, string imagePath)
         {
             if (!File.Exists(imagePath))
             {
                 Console.WriteLine(
                     "\nUnable to open or read localImagePath:\n{0} \n", imagePath);
-                return;
+                throw new FileNotFoundException(imagePath);
             }
 
             using (Stream imageStream = File.OpenRead(imagePath))
@@ -60,19 +60,19 @@ namespace AzureVisionCognitiveServicesDemo
                     await computerVision.RecognizeTextInStreamAsync(
                         imageStream, Variables.TextRecognitionMode);
 
-                await GetTextAsync(computerVision, textHeaders.OperationLocation);
+                return await GetTextAsync(computerVision, textHeaders.OperationLocation);
             }
         }
 
         // Recognize text from a remote image
-        public static async Task ExtractRemoteTextAsync(
+        public static async Task<TextOperationResult> ExtractRemoteTextAsync(
             ComputerVisionClient computerVision, string imageUrl)
         {
             if (!Uri.IsWellFormedUriString(imageUrl, UriKind.Absolute))
             {
                 Console.WriteLine(
                     "\nInvalid remoteImageUrl:\n{0} \n", imageUrl);
-                return;
+                throw new FileNotFoundException(imageUrl);
             }
 
             // Start the async process to recognize the text
@@ -80,11 +80,11 @@ namespace AzureVisionCognitiveServicesDemo
                 await computerVision.RecognizeTextAsync(
                     imageUrl, Variables.TextRecognitionMode);
 
-            await GetTextAsync(computerVision, textHeaders.OperationLocation);
+            return await GetTextAsync(computerVision, textHeaders.OperationLocation);
         }
 
         // Retrieve the recognized text
-        private static async Task GetTextAsync(
+        private static async Task<TextOperationResult> GetTextAsync(
             ComputerVisionClient computerVision, string operationLocation)
         {
             // Retrieve the URI where the recognized text will be
@@ -109,12 +109,11 @@ namespace AzureVisionCognitiveServicesDemo
                 result = await computerVision.GetTextOperationResultAsync(operationId);
             }
 
-            DisplayResults(result);
+            return result;
         }
 
-        private static void DisplayResults(TextOperationResult result)
+        public static void DisplayResults(TextOperationResult result)
         {
-
             // Display the results
             Console.WriteLine();
             var lines = result.RecognitionResult.Lines;
