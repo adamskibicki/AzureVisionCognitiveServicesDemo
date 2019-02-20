@@ -36,7 +36,12 @@ namespace AzureVisionCognitiveServicesDemo.FaceGrouping
             await IdentifySuspects(faceServiceClient, Paths.TEST_IMAGE_PATH_2);
             Console.ReadLine();
 
-            await DeleteGroup(faceServiceClient);
+            await IdentifySuspects(faceServiceClient, Paths.TEST_IMAGE_PATH_3);
+            Console.ReadLine();
+
+            #region comment it if you don't want to delete previously created group
+            //await DeleteGroup(faceServiceClient);
+            #endregion
         }
 
         private static async Task DefinePeople(FaceServiceClient faceServiceClient)
@@ -68,6 +73,8 @@ namespace AzureVisionCognitiveServicesDemo.FaceGrouping
             await AddPersonFaceAsync(faceServiceClient, suspect2, Paths.suspect2ImageDir);
             await AddPersonFaceAsync(faceServiceClient, suspect3, Paths.suspect3ImageDir);
             await AddPersonFaceAsync(faceServiceClient, suspect4, Paths.suspect4ImageDir);
+
+            Console.WriteLine("People in group created");
         }
 
         private static async Task AddPersonFaceAsync(FaceServiceClient faceServiceClient, CreatePersonResult suspectCreatePersonResult, string imageDir)
@@ -132,6 +139,8 @@ namespace AzureVisionCognitiveServicesDemo.FaceGrouping
 
                 await Task.Delay(1000);
             }
+
+            Console.WriteLine("Training ended");
         }
 
         private static async Task DeleteGroup(FaceServiceClient faceServiceClient)
