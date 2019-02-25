@@ -30,8 +30,24 @@ namespace AzureVisionCognitiveServicesDemo.Face
             Console.ReadLine();
 
             var r3 = await FaceAnalyzer
+                .DetectLocalAsync(faceClient, Paths.LOCAL_IMAGE_PATH_2);
+            FaceAnalyzer.DisplayResults(r3, Paths.LOCAL_IMAGE_PATH_2);
+            Console.ReadLine();
+
+            var r4 = await FaceAnalyzer
                 .CompareTwoFaces(faceClient, r1.First().FaceId.Value, r2.First().FaceId.Value);
-            FaceAnalyzer.DisplayResults(r3);
+            FaceAnalyzer.DisplayResults(r4);
+            Console.ReadLine();
+
+            var r5 = await FaceAnalyzer
+                .CompareTwoFaces(faceClient, r1.First().FaceId.Value, r3.First().FaceId.Value);
+            FaceAnalyzer.DisplayResults(r5);
+            Console.ReadLine();
+
+            var r6 = await FaceAnalyzer
+                .CompareTwoFaces(faceClient, r2.First().FaceId.Value, r3.First().FaceId.Value);
+            FaceAnalyzer.DisplayResults(r6);
+            Console.ReadLine();
 
             Console.WriteLine("Press any key to exit");
             Console.ReadLine();
