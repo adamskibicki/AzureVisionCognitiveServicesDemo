@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureVisionCognitiveService
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureVisionCognitiveServicesDemo.FaceGrouping", "AzureVisionCognitiveServicesDemo.FaceGrouping\AzureVisionCognitiveServicesDemo.FaceGrouping.csproj", "{EE9E5ABF-C5FC-4E85-9F34-90F52A0679B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureVisionCognitiveServicesDemo.ContentModerator", "AzureVisionCognitiveServicesDemo.ContentModerator\AzureVisionCognitiveServicesDemo.ContentModerator.csproj", "{E3801109-DF99-4297-AD8D-E32CC805171C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EE9E5ABF-C5FC-4E85-9F34-90F52A0679B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE9E5ABF-C5FC-4E85-9F34-90F52A0679B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE9E5ABF-C5FC-4E85-9F34-90F52A0679B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3801109-DF99-4297-AD8D-E32CC805171C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3801109-DF99-4297-AD8D-E32CC805171C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3801109-DF99-4297-AD8D-E32CC805171C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3801109-DF99-4297-AD8D-E32CC805171C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
