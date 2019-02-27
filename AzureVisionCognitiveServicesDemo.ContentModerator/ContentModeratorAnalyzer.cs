@@ -35,5 +35,31 @@ namespace AzureVisionCognitiveServicesDemo.ContentModerator
             }
             return null;
         }
+
+        public static async Task<Screen> ModerateTextAsync(ContentModeratorClient contentModeratorClient, string textFilePath)
+        {
+            if (!File.Exists(textFilePath))
+            {
+                Console.WriteLine(
+                    "\nUnable to open or read localImagePath:\n{0} \n", textFilePath);
+                return null;
+            }
+
+            try
+            {
+                using (Stream textStream = File.OpenRead(textFilePath))
+                {
+                    HttpOperationResponse<Screen> response =
+                        await contentModeratorClient.TextModeration.ScreenTextWithHttpMessagesAsync("text/plain", textStream);
+
+                    return response.Body;
+                }
+            }
+            catch (APIErrorException e)
+            {
+                Console.WriteLine(textFilePath + ": " + e.Message);
+            }
+            return null;
+        }
     }
 }

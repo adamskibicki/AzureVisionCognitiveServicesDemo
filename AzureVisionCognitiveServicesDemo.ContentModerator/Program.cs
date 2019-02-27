@@ -37,6 +37,10 @@ namespace AzureVisionCognitiveServicesDemo.ContentModerator
             var r4 = await ContentModeratorAnalyzer.DetectLocalAsync(contentModeratorClient, Paths.IMAGE_PATH_3);
             Console.WriteLine(JsonConvert.SerializeObject(r4, Formatting.Indented));
             Console.ReadLine();
+
+            var r5 = await ContentModeratorAnalyzer.DetectLocalAsync(contentModeratorClient, Paths.TEXT_PATH);
+            Console.WriteLine(JsonConvert.SerializeObject(r5, Formatting.Indented));
+            Console.ReadLine();
         }
     }
 }
