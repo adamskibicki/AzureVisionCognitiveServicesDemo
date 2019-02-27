@@ -41,7 +41,7 @@ namespace AzureVisionCognitiveServicesDemo.ContentModerator
             if (!File.Exists(textFilePath))
             {
                 Console.WriteLine(
-                    "\nUnable to open or read localImagePath:\n{0} \n", textFilePath);
+                    "\nUnable to open or read path:\n{0} \n", textFilePath);
                 return null;
             }
 
